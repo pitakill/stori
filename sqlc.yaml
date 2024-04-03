@@ -1,0 +1,30 @@
+version: "2"
+sql:
+  - engine: "sqlite"
+    queries: "cmd/http/queries.sql"
+    schema: "cmd/http/schema.sql"
+    gen:
+      go:
+        package: "repository"
+        out: "internal/adapter/storage/sqlite3/repository"
+        overrides:
+          - column: "users.id"
+            go_type:
+              import: "github.com/google/uuid"
+              type: "UUID"
+          - column: "accounts.id"
+            go_type:
+              import: "github.com/google/uuid"
+              type: "UUID"
+          - column: "accounts.user_id"
+            go_type:
+              import: "github.com/google/uuid"
+              type: "UUID"
+          - column: "transactions.id"
+            go_type:
+              import: "github.com/google/uuid"
+              type: "UUID"
+          - column: "transactions.account_id"
+            go_type:
+              import: "github.com/google/uuid"
+              type: "UUID"
